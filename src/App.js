@@ -8,7 +8,7 @@ import SignIn from './SignIn';
 function App() {
   return (
     <div className="App">
-    <SignIn/>
+    <Home/>
     </div>
   );
 }
