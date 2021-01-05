@@ -1,11 +1,8 @@
-import { Button } from "antd";
 import Layout, { Content } from "antd/lib/layout/layout";
 import React from "react";
 import "./App.css";
-import { Typography } from 'antd';
 import Navbar from "./Navbar";
 
-const { Text, Link } = Typography;
 const HomeU = () => {
   return (
     <Layout className="layout">

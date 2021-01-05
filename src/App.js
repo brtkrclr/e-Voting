@@ -4,11 +4,13 @@ import Navbar from "./Navbar";
 import NavbarU from './NavbarU';
 import Home from './Home';
 import SignIn from './SignIn';
+import CreateVotingForm from './CreateVotingForm';
+import EditVoting from './EditVoting';
 
 function App() {
   return (
     <div className="App">
-    <Home/>
+    <EditVoting/>
     </div>
   );
 }
