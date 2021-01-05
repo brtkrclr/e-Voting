@@ -19,6 +19,7 @@ import {
 import React from "react";
 import "./App.css";
 import Search from "antd/lib/input/Search";
+import SignIn from "./SignIn";
 const { Header, Content, Footer } = Layout;
 
 const NavbarU = () => {
@@ -75,7 +76,7 @@ const NavbarU = () => {
         </Col>
         <Col span={8} className="subMenu">
           <div style={{ float: "right" }}>
-          <Button type="primary"><a href="www.google.com">Log In</a></Button>
+          <Button type="primary"><a href={SignIn}>Log In</a></Button>
           </div>
         </Col>
       </Row>

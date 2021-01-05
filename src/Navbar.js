@@ -12,7 +12,6 @@ import SubMenu from "antd/lib/menu/SubMenu";
 import {
   MenuOutlined,
   UserOutlined,
-  SettingFilled,
   CloseOutlined,
   DownOutlined,
 } from "@ant-design/icons";

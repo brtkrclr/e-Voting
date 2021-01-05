@@ -3,14 +3,14 @@ import Layout, { Content } from "antd/lib/layout/layout";
 import React from "react";
 import "./App.css";
 import NavbarU from "./NavbarU";
-import { Typography } from 'antd';
+import { Typography } from "antd";
 import SignIn from "./SignIn";
+import { Route, Router } from "react-router-dom";
 
 const { Text, Link } = Typography;
 const HomeU = () => {
   return (
     <Layout className="layout">
-      
       <NavbarU />
 
       <div style={{ marginTop: "50px" }}>
@@ -47,15 +47,17 @@ const HomeU = () => {
             <br />
 
             <div style={{ textAlign: "center" }}>
-              <Button type="primary" style={{ fontSize: "18px" }}>
-                <a href="www.google.com">Log In</a>
-              </Button>
+              <Link to="/login">
+                <Button type="primary" style={{ fontSize: "18px" }}>
+                  Log In
+                </Button>
+              </Link>
               <br />
               <br />
               <h2 style={{ textAlign: "center" }}>
                 Don't have an account?
                 <br />
-                <a href="SignIn.js" style={{ fontSize: "18px" }}>
+                <a href={SignIn} style={{ fontSize: "18px" }}>
                   <Text underline>Register</Text>
                 </a>
               </h2>

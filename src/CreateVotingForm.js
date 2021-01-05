@@ -1,4 +1,4 @@
-import { Button, DatePicker, Form, Input, Radio, Switch } from "antd";
+import { Button, DatePicker, Divider, Form, Input, Radio, Switch } from "antd";
 import Layout, { Content } from "antd/lib/layout/layout";
 import React, { Component } from "react";
 import "./App.css";
@@ -40,8 +40,7 @@ export default class CreateVotingForm extends Component {
               <h2 style={{ textAlign: "center", fontSize: "36px" }}>
                 Create Voting
               </h2>
-              <hr />
-
+              <Divider style={{ color: "gray" }}/>
               <Form
                 name="basic"
                 initialValues={{ remember: true }}
