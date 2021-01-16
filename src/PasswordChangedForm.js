@@ -1,27 +1,31 @@
 import { Form, Input, Button, Divider, Result } from "antd";
-import Layout, { Content } from "antd/lib/layout/layout";
+import Layout, { Content, Footer } from "antd/lib/layout/layout";
 import React, { Component } from "react";
 import "./App.css";
 import NavbarU from "./NavbarU";
-import { Typography } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
-import Item from "antd/es/list/Item";
+import axios from "axios";
+import Home from "./Home";
+import { withRouter } from "react-router-dom";
 const { Password } = Input;
-const { Text, Link } = Typography;
 
 export default class PasswordChangedForm extends Component {
   constructor(props) {
     super(props);
   }
-
   render() {
-    const formSuccess = (datas) => {
-      console.log("Form was finished successfully: ", datas);
+    const formSuccess = (data) => {
+      console.log("Form was finished successfully: ", data);
     };
 
     const formFail = (error) => {
       console.log("Form failed: ", error);
     };
+
+    const nextPath = (path) => {
+      this.props.history.push(path);
+    };
+
     return (
       <Layout className="layout">
         <NavbarU />
@@ -38,6 +42,7 @@ export default class PasswordChangedForm extends Component {
               />
 
               <Divider />
+
               <Form
                 name="Form"
                 initialValues={{
@@ -88,6 +93,7 @@ export default class PasswordChangedForm extends Component {
                     type="primary"
                     htmlType="submit"
                     style={{}}
+                    onClick={() => this.nextPath(Home)}
                   >
                     Sign In
                   </Button>
@@ -96,6 +102,7 @@ export default class PasswordChangedForm extends Component {
             </div>
           </Content>
         </div>
+        <Footer style={{ textAlign: "center" }}>©2021 BallotBox</Footer>
       </Layout>
     );
   }

@@ -20,43 +20,13 @@ import React from "react";
 import "./App.css";
 import Search from "antd/lib/input/Search";
 import SignIn from "./SignIn";
+import { Link } from "react-router-dom";
 const { Header, Content, Footer } = Layout;
 
 const NavbarU = () => {
   const onSearch = (value) => console.log(value);
 
-  const menu = (
-    <Menu>
-      <Menu.Item>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="http://www.alipay.com/"
-        >
-          1st menu item
-        </a>
-      </Menu.Item>
-      <Menu.Item>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="http://www.taobao.com/"
-        >
-          2nd menu item
-        </a>
-      </Menu.Item>
-      <Menu.Item>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="http://www.tmall.com/"
-        >
-          3rd menu item
-        </a>
-      </Menu.Item>
-      <Menu.Item danger>a danger item</Menu.Item>
-    </Menu>
-  );
+
   return (
     <Header>
       <Row>
@@ -76,7 +46,9 @@ const NavbarU = () => {
         </Col>
         <Col span={8} className="subMenu">
           <div style={{ float: "right" }}>
-          <Button type="primary"><a href={SignIn}>Log In</a></Button>
+            <Link to="/signin">
+              <Button type="primary">Log In</Button>
+            </Link>
           </div>
         </Col>
       </Row>

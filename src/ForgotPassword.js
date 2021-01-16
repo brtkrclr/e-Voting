@@ -1,22 +1,13 @@
-import {
-  Form,
-  Input,
-  Button,
-  Divider,
-  Result,
-  message,
-  PageHeader,
-} from "antd";
+import { Form, Input, Button, Divider, message, PageHeader } from "antd";
 import Layout, { Content, Footer } from "antd/lib/layout/layout";
-import React, { Component } from "react";
 import "./App.css";
 import NavbarU from "./NavbarU";
-import { Typography } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
-import Item from "antd/es/list/Item";
-import Title from "antd/lib/skeleton/Title";
-const { Password } = Input;
-const { Text, Link } = Typography;
+import React, { Component } from "react";
+import Title from "antd/es/typography/Title";
+import { Link } from "react-router-dom";
+//import axios from "axios";
+// import sign up
 
 export default class ForgotPassword extends Component {
   constructor(props) {
@@ -24,8 +15,8 @@ export default class ForgotPassword extends Component {
   }
 
   render() {
-    const formSuccess = (datas) => {
-      console.log("Form was finished successfully: ", datas);
+    const formSuccess = (data) => {
+      console.log("Form was finished successfully: ", data);
     };
 
     const formFail = (error) => {
@@ -37,16 +28,22 @@ export default class ForgotPassword extends Component {
         "We sent an email with a link to get back into your account.."
       );
     };
+
     return (
       <Layout className="layout">
         <NavbarU />
 
         <div style={{ marginTop: "50px" }}>
-          <Content style={{ padding: "0 50px" }}>
+          <Content style={{ padding: "0 50px", textAlign: "center" }}>
             <div className="site-layout-content">
-              <h2 style={{ textAlign: "center", fontSize: "36px" }}>
-                Trouble logging in?
-              </h2>
+              <LockOutlined style={{ fontSize: "60px" }} theme="outlined" />
+              <br />
+              <br />
+              <Title level={3}>Trouble Logging In?</Title>
+              <PageHeader
+                className="site-page-header"
+                subTitle="Enter your email and we'll send you a link to get back into your account"
+              />
 
               <Divider />
               <Form
@@ -93,18 +90,19 @@ export default class ForgotPassword extends Component {
                 <Divider style={{ color: "gray" }}>OR</Divider>
                 <div style={{ textAlign: "center" }}>
                   <a href="">
-                    <Button type="text" style={{ color: "darkblue" }}>
-                      Create New Account
-                    </Button>
+                    <Link to="/">
+                      <Button type="text" style={{ color: "darkblue" }}>
+                        Create New Account
+                      </Button>
+                    </Link>
                   </a>
                 </div>
               </Form>
             </div>
           </Content>
         </div>
-        <Footer style={{textAlign:"center"}}>©2021 BallotBox</Footer>
+        <Footer style={{ textAlign: "center" }}>©2021 BallotBox</Footer>
       </Layout>
-      
     );
   }
 }
