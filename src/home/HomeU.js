@@ -1,10 +1,10 @@
 import { Button } from "antd";
 import Layout, { Content } from "antd/lib/layout/layout";
 import React from "react";
-import "./App.css";
-import NavbarU from "./NavbarU";
+import "../App.css"
+import NavbarU from "../navbar/NavbarU";
 import { Typography } from "antd";
-import SignIn from "./SignIn";
+import SignIn from "../auth/SignIn";
 import { Route, Router } from "react-router-dom";
 
 const { Text, Link } = Typography;

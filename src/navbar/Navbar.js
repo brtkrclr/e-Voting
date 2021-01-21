@@ -16,10 +16,10 @@ import {
   DownOutlined,
 } from "@ant-design/icons";
 import React from "react";
-import "./App.css";
+import "../App.css"
 import { Link } from "react-router-dom";
 import Search from "antd/lib/input/Search";
-import AuthService from "./services/auth.services";
+import AuthService from "../services/auth.services";
 const { Header, Content, Footer } = Layout;
 const Navbar = () => {
   const onSearch = (value) => console.log(value);

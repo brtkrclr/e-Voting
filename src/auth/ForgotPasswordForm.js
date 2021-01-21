@@ -1,7 +1,7 @@
 import {Form, Input, Button,  Divider, message, PageHeader} from 'antd';
 import Layout, { Content, Footer } from "antd/lib/layout/layout";
-import "./App.css";
-import NavbarU from "./NavbarU";
+import "../App.css"
+import NavbarU from "../navbar/NavbarU";
 import {MailOutlined, LockOutlined} from '@ant-design/icons';
 import React, { Component } from "react";
 import Title from "antd/es/typography/Title";

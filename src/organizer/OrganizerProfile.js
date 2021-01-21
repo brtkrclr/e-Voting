@@ -9,8 +9,8 @@ import {
 } from "antd";
 import Layout, { Content, Footer } from "antd/lib/layout/layout";
 import React, { Component } from "react";
-import "./App.css";
-import Navbar from "./Navbar";
+import "../App.css"
+import Navbar from "../navbar/Navbar";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";

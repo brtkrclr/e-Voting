@@ -1,9 +1,9 @@
 import { Button, DatePicker, Divider, Form, Input, Radio, Switch } from "antd";
 import Layout, { Content } from "antd/lib/layout/layout";
 import React, { Component } from "react";
-import "./App.css";
+import "../App.css"
 import { Typography } from "antd";
-import Navbar from "./Navbar";
+import Navbar from "../navbar/Navbar";
 import axios from "axios";
 import moment from "moment";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";

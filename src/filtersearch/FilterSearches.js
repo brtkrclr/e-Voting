@@ -1,9 +1,9 @@
 import { Button, Menu } from "antd";
 import Layout, { Content } from "antd/lib/layout/layout";
 import React, {Component} from "react";
-import "./App.css";
+import "../App.css"
 import { Typography } from 'antd';
-import Navbar from "./Navbar";
+import Navbar from "../navbar/Navbar";
 import Sider from "antd/es/layout/Sider";
 import axios from "axios";
 import {Row, Col} from 'antd';

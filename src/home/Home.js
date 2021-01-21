@@ -1,7 +1,7 @@
 import Layout, { Content, Footer } from "antd/lib/layout/layout";
 import React, { Component } from "react";
-import "./App.css";
-import Navbar from "./Navbar";
+import "../App.css"
+import Navbar from "../navbar/Navbar";
 import axios from "axios";
 import { Divider, Space, Table, List } from "antd";
 import Avatar from "antd/lib/avatar/avatar";

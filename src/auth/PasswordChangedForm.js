@@ -1,11 +1,11 @@
 import { Form, Input, Button, Divider, Result } from "antd";
 import Layout, { Content, Footer } from "antd/lib/layout/layout";
 import React, { Component } from "react";
-import "./App.css";
-import NavbarU from "./NavbarU";
+import "../App.css"
+import NavbarU from "../navbar/NavbarU";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import axios from "axios";
-import Home from "./Home";
+import Home from "../home/Home";
 import { withRouter } from "react-router-dom";
 const { Password } = Input;
 

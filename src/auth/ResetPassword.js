@@ -1,8 +1,8 @@
 import {Form, Input, Button,  Divider, message, PageHeader} from 'antd';
 import Layout, {Content, Footer} from "antd/lib/layout/layout";
 import React, { Component } from "react";
-import "./App.css";
-import NavbarU from "./NavbarU";
+import "../App.css"
+import NavbarU from "../navbar/NavbarU";
 import { Typography } from 'antd';
 import {MailOutlined, LockOutlined} from '@ant-design/icons';
 //import axios from "axios";

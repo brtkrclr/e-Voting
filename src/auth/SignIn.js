@@ -1,13 +1,13 @@
 import { Form, Input, Button, Divider } from "antd";
 import { MailOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
-import "./App.css";
+import "../App.css"
 import React, { useState, useRef } from "react";
 import Layout, { Content, Footer } from "antd/lib/layout/layout";
-import NavbarU from "./NavbarU";
+import NavbarU from "../navbar/Navbar";
 import { Link, Route } from "react-router-dom";
 import Item from "antd/es/list/Item";
 import axios from "axios";
-import AuthService from "./services/auth.services"
+import AuthService from "../services/auth.services"
 const { Password } = Input;
 
 const required = (value) => {

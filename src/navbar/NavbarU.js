@@ -17,9 +17,9 @@ import {
   DownOutlined,
 } from "@ant-design/icons";
 import React from "react";
-import "./App.css";
+import "../App.css"
 import Search from "antd/lib/input/Search";
-import SignIn from "./SignIn";
+import SignIn from "../auth/SignIn";
 import { Link } from "react-router-dom";
 const { Header, Content, Footer } = Layout;
 

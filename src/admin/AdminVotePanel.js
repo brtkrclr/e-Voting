@@ -1,9 +1,9 @@
 import { Button, DatePicker, Divider, Form, Input, Radio, Switch } from "antd";
 import Layout, { Content, Footer } from "antd/lib/layout/layout";
 import React, { Component } from "react";
-import "./App.css";
+import "../App.css";
 import { Typography } from "antd";
-import Navbar from "./Navbar";
+import Navbar from "../navbar/Navbar";
 import axios from "axios";
 import { List, Avatar, Skeleton } from "antd";
 
