@@ -15,8 +15,8 @@ import {
   CloseOutlined,
   DownOutlined,
 } from "@ant-design/icons";
-import React from "react";
-import "../App.css"
+import React, { useState, useEffect } from "react";
+import "../App.css";
 import { Link } from "react-router-dom";
 import Search from "antd/lib/input/Search";
 import AuthService from "../services/auth.services";
@@ -24,33 +24,57 @@ const { Header, Content, Footer } = Layout;
 const Navbar = () => {
   const onSearch = (value) => console.log(value);
 
+  const [showModeratorBoard, setShowModeratorBoard] = useState(false);
+  const [showAdminBoard, setShowAdminBoard] = useState(false);
+  const [currentUser, setCurrentUser] = useState(undefined);
+
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+
+    if (user) {
+      setCurrentUser(user.roles.includes("ROLE_USER"));
+      setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
+      setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+    }
+  }, []);
+
   const logOut = () => {
     AuthService.logout();
   };
 
   const menu = (
     <Menu>
-      <Link to="/organizerprofile">
-        <Menu.Item icon={<UserOutlined />}>
+      <div style={{textAlign:"center"}}>
+        {showModeratorBoard && (
+          <Menu.Item icon={<UserOutlined />}>
+            <Link to={"/organizer"}>Organizer </Link>
+          </Menu.Item>
+        )}
+
+        {showAdminBoard && (
+          <Menu.Item icon={<UserOutlined />}>
+            <Link to={"/admin"}>Admin </Link>
+          </Menu.Item>
+        )}
+         {currentUser && (
+          <Menu.Item icon={<UserOutlined />}>
+            <Link to={"/user"}>User </Link>
+          </Menu.Item>
+        )}
+      
+
+      </div>
+      <Menu.Item icon={<CloseOutlined />}>
+        <Link to="/home">
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="http://www.google.com/"
+            onClick={logOut}
+            href="/"
           >
-            Profile
+            Log Out
           </a>
-        </Menu.Item>
-      </Link>
-
-      <Menu.Item icon={<CloseOutlined />}>
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={logOut}
-          href="/signin"
-        >
-          Log Out
-        </a>
+        </Link>
       </Menu.Item>
     </Menu>
   );

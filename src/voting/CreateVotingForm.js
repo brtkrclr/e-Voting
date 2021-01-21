@@ -1,7 +1,7 @@
 import { Button, DatePicker, Divider, Form, Input, Radio, Switch } from "antd";
 import Layout, { Content } from "antd/lib/layout/layout";
 import React, { Component } from "react";
-import "../App.css"
+import "../App.css";
 import { Typography } from "antd";
 import Navbar from "../navbar/Navbar";
 import axios from "axios";
@@ -51,8 +51,8 @@ export default class CreateVotingForm extends Component {
       })
       .catch((error) => {
         console.log(error);
-      })
-      .then((resp) => (window.location.href = "/home"));
+      });
+    //.then((resp) => (window.location.href = "/home"));
   };
 
   render() {
@@ -135,7 +135,6 @@ export default class CreateVotingForm extends Component {
                     }
                   />
                 </Form.Item>
-
                 <Text>START DATE</Text>
                 <Form.Item
                   required
@@ -144,7 +143,7 @@ export default class CreateVotingForm extends Component {
                 >
                   <DatePicker
                     name="start"
-                    format="YYYY-MM-DD HH:mm:ss"
+                    format="YYYY-MM-DD "
                     disabledDate={disabledDate}
                     onChange={(startDate) => this.setState({ startDate })}
                     value={this.state.startDate}
@@ -159,7 +158,7 @@ export default class CreateVotingForm extends Component {
                 >
                   <DatePicker
                     name="start"
-                    format="YYYY-MM-DD HH:mm:ss"
+                    format="YYYY-MM-DD "
                     defaultDate={this.state.startDate}
                     disabledDate={disabledDate}
                     onChange={(endDate) => this.setState({ endDate })}
@@ -167,18 +166,36 @@ export default class CreateVotingForm extends Component {
                   />
                 </Form.Item>
 
-                <Text>VOTING METHOD</Text>
+                <Text>TYPE OF VOTING</Text>
                 <Form.Item
                   required
                   name="votingMethod"
                   rules={[{ required: true, message: "Please input!" }]}
                 >
                   <Radio.Group name="radiogroup">
-                    <Radio.Button value={1} onChange={this.formChange}>
-                      Single
+                    <Radio.Button
+                      value={1}
+                      onChange={(text) =>
+                        this.setState({ votingMethod: text.target.value })
+                      }
+                    >
+                      Participatory
                     </Radio.Button>
-                    <Radio.Button value={2} onChange={this.formChange}>
-                      Multiple
+                    <Radio.Button
+                      value={2}
+                      onChange={(text) =>
+                        this.setState({ votingMethod: text.target.value })
+                      }
+                    >
+                      Educational
+                    </Radio.Button>
+                    <Radio.Button
+                      value={3}
+                      onChange={(text) =>
+                        this.setState({ votingMethod: text.target.value })
+                      }
+                    >
+                      Political
                     </Radio.Button>
                   </Radio.Group>
                 </Form.Item>
@@ -190,8 +207,22 @@ export default class CreateVotingForm extends Component {
                   rules={[{ required: true, message: "Please input!" }]}
                 >
                   <Radio.Group name="radiogroup2">
-                    <Radio.Button value={1}>E-mail</Radio.Button>
-                    <Radio.Button value={2}>Public</Radio.Button>
+                    <Radio.Button
+                      value={1}
+                      onChange={(text) =>
+                        this.setState({ accessType: text.target.value })
+                      }
+                    >
+                      E-mail
+                    </Radio.Button>
+                    <Radio.Button
+                      value={2}
+                      onChange={(text) =>
+                        this.setState({ accessType: text.target.value })
+                      }
+                    >
+                      Public
+                    </Radio.Button>
                   </Radio.Group>
                 </Form.Item>
 

@@ -1,6 +1,6 @@
-import { Form, Input, Button, Checkbox, Alert } from "antd";
+import { Form, Input, Button, Checkbox, Alert, Radio } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
-import "../App.css"
+import "../App.css";
 import React, { useState, useRef } from "react";
 import Layout, { Content } from "antd/lib/layout/layout";
 import NavbarU from "../navbar/NavbarU";
@@ -12,10 +12,10 @@ import { isEmail } from "validator";
 const SignUp = (props) => {
   const form = useRef();
   const checkBtn = useRef();
-
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [roles, setRoles] = useState([""]);
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -33,6 +33,10 @@ const SignUp = (props) => {
     const password = e.target.value;
     setPassword(password);
   };
+  const onChangeRoles = (e) => {
+    setRoles(e.target.value);
+    console.log(roles);
+  };
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -40,10 +44,12 @@ const SignUp = (props) => {
     setMessage("Successfull");
     setSuccessful(false);
 
-    AuthService.register(username, email, password).then(
+    AuthService.register(username, email, password, roles).then(
+      
       (response) => {
         setMessage(response.data.message);
         setSuccessful(true);
+        
       },
       (error) => {
         const resMessage =
@@ -128,6 +134,31 @@ const SignUp = (props) => {
                 />
               </Form.Item>
 
+              <Form.Item
+                required
+                name="roles"
+                rules={[
+                  {
+                    message: "Please select your Role!",
+                  },
+                ]}
+              >
+                <Radio.Group name="radiogroup" value={roles}>
+                  <Radio
+                    value={""}
+                    onChange={(text) => setRoles([text.target.value])}
+                  >
+                    Voter
+                  </Radio>
+                  <Radio
+                    value={"mod"}
+                    onChange={(text) => setRoles([text.target.value])}
+                  >
+                    Organizer
+                  </Radio>
+                </Radio.Group>
+              </Form.Item>
+
               <Form.Item>
                 <Button
                   type="primary"
@@ -138,10 +169,12 @@ const SignUp = (props) => {
                   Sign Up
                 </Button>
               </Form.Item>
+
               <Form.Item>
                 <Alert message={message} type={successful} />
               </Form.Item>
             </Form>
+            
           </div>
         </Content>
       </div>

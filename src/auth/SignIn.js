@@ -1,13 +1,13 @@
 import { Form, Input, Button, Divider } from "antd";
 import { MailOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
-import "../App.css"
-import React, { useState, useRef } from "react";
+import "../App.css";
+import React, { useState, useRef ,useEffect} from "react";
 import Layout, { Content, Footer } from "antd/lib/layout/layout";
-import NavbarU from "../navbar/Navbar";
+import NavbarU from "../navbar/NavbarU";
 import { Link, Route } from "react-router-dom";
 import Item from "antd/es/list/Item";
 import axios from "axios";
-import AuthService from "../services/auth.services"
+import AuthService from "../services/auth.services";
 const { Password } = Input;
 
 const required = (value) => {
@@ -29,6 +29,20 @@ const SignIn = (props) => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
+  const [showModeratorBoard, setShowModeratorBoard] = useState(false);
+  const [showAdminBoard, setShowAdminBoard] = useState(false);
+  const [currentUser, setCurrentUser] = useState(undefined);
+
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+
+    if (user) {
+      setCurrentUser(user.roles.includes("ROLE_USER"));
+      setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
+      setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+    }
+  }, []);
+  //--------------------------------------------------------
   const onChangeUsername = (e) => {
     const username = e.target.value;
     setUsername(username);
@@ -45,25 +59,35 @@ const SignIn = (props) => {
     setMessage("");
     setLoading(true);
 
-
-      AuthService.login(username, password).then(
-        () => {
-          props.history.push("/home");
+    AuthService.login(username, password).then(
+      () => {
+        if (showAdminBoard) {
+          props.history.push("/admin");
           window.location.reload();
-        },
-        (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
+        }else if(showModeratorBoard){
 
-          setLoading(false);
-          setMessage(resMessage);
+          props.history.push("/organizer");
+          window.location.reload();
+        }else{
+
+          props.history.push("/user");
+          window.location.reload();
         }
-      );
-      setLoading(false);
+
+      },
+      (error) => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        setLoading(false);
+        setMessage(resMessage);
+      }
+    );
+    setLoading(false);
   };
 
   return (
@@ -160,14 +184,13 @@ const SignIn = (props) => {
               </Link>
             </Item>
 
-
-          {message && (
-            <div className="form-group">
-              <div className="alert alert-danger" role="alert">
-                {message}
+            {message && (
+              <div className="form-group">
+                <div className="alert alert-danger" role="alert">
+                  {message}
+                </div>
               </div>
-            </div>
-          )}
+            )}
           </div>
         </Content>
       </div>
