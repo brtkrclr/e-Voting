@@ -7,7 +7,6 @@ import UserService from "../services/user.service";
 
 const BoardUser = () => {
   const [content, setContent] = useState("");
-
   useEffect(() => {
     UserService.getUserBoard().then(
       (response) => {

@@ -51,7 +51,7 @@ const App = () => {
             />
             <Route path="/profile" component={Profile} />
             <Route path="/organizerprofile" component={OrganizerProfile} />
-            <Route path="organizer" component={BoardOrganizer} />
+            <Route path="/organizer" component={BoardOrganizer} />
             <Route path="/user" component={BoardUser} />
             <Route path="/admin" component={BoardAdmin} />
             <Route path="/createvote" component={CreateVotingForm} />

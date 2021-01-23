@@ -1,7 +1,7 @@
 import { Form, Input, Button, Divider } from "antd";
 import { MailOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
 import "../App.css";
-import React, { useState, useRef ,useEffect} from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Layout, { Content, Footer } from "antd/lib/layout/layout";
 import NavbarU from "../navbar/NavbarU";
 import { Link, Route } from "react-router-dom";
@@ -28,20 +28,6 @@ const SignIn = (props) => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
-
-  const [showModeratorBoard, setShowModeratorBoard] = useState(false);
-  const [showAdminBoard, setShowAdminBoard] = useState(false);
-  const [currentUser, setCurrentUser] = useState(undefined);
-
-  useEffect(() => {
-    const user = AuthService.getCurrentUser();
-
-    if (user) {
-      setCurrentUser(user.roles.includes("ROLE_USER"));
-      setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
-      setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
-    }
-  }, []);
   //--------------------------------------------------------
   const onChangeUsername = (e) => {
     const username = e.target.value;
@@ -55,25 +41,28 @@ const SignIn = (props) => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-
     setMessage("");
     setLoading(true);
 
     AuthService.login(username, password).then(
-      () => {
-        if (showAdminBoard) {
+      (response) => {
+        if((response && response.roles && response.roles[0] === "ROLE_USER")){
+          props.history.push("/user");
+          window.location.reload();
+        }else if((response && response.roles && response.roles[0] === "ROLE_ADMIN")){
           props.history.push("/admin");
           window.location.reload();
-        }else if(showModeratorBoard){
-
+        }else if((response && response.roles && response.roles[0] === "ROLE_MODERATOR")){
           props.history.push("/organizer");
           window.location.reload();
         }else{
-
-          props.history.push("/user");
+          props.history.push("/login");
           window.location.reload();
+          <h6>PLEASE ENTER A VALID ACCOUNT</h6>
         }
-
+      
+         
+        
       },
       (error) => {
         const resMessage =
@@ -95,7 +84,15 @@ const SignIn = (props) => {
       <NavbarU />
 
       <div style={{ marginTop: "50px" }}>
-        <Content style={{ padding: "0 50px", textAlign: "center" }}>
+        <Content
+          style={{
+            padding: "0 50px",
+            textAlign: "center",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <div className="site-layout-content">
             <h1 className="title">Sign In</h1>
             <Divider />

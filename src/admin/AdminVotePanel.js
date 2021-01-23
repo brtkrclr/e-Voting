@@ -114,13 +114,13 @@ export default class AdminVotePanel extends Component {
                       active
                     >
                       <List.Item.Meta
-                       
+                        
                         title={
                           <a href="https://ant.design">{item.name.last}</a>
                         }
                         description="Ant Design, a design language for background applications, is refined by Ant UED Team"
                       />
-                      <div>content</div>
+                      <div>denemeeeee</div>
                     </Skeleton>
                   </List.Item>
                 )}

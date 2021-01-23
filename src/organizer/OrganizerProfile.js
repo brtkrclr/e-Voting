@@ -105,14 +105,8 @@ export default class OrganizerProfile extends Component {
     ];
 
     return (
-      <Layout className="layout">
-        <Navbar />
-        <div style={{ marginTop: "50px" }}>
-          <Content style={{ padding: "0 50px"}}>
             <div className="site-layout-content">
-              <h1 className="title" style={{textAlign: "center" }}>Organizer Page</h1>
-              <Divider style={{ color: "gray" }} />
-
+            
               <Link to="/createvote">
                 <Button
                   className="button-color"
@@ -146,10 +140,6 @@ export default class OrganizerProfile extends Component {
                 ))}
               </List>
             </div>
-          </Content>
-        </div>
-        <Footer style={{ textAlign: "center" }}>©️2021 BallotBox</Footer>
-      </Layout>
     );
   }
 }

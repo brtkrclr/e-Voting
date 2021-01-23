@@ -3,6 +3,7 @@ import { Divider } from "antd";
 import Layout, { Content, Footer } from "antd/lib/layout/layout";
 import UserService from "../services/user.service";
 import Navbar from "../navbar/Navbar";
+import OrganizerProfile from "../organizer/OrganizerProfile";
 
 const BoardOrganizer = () => {
   const [content, setContent] = useState("");
@@ -34,6 +35,7 @@ const BoardOrganizer = () => {
           <Divider style={{ color: "gray" }} />
 
          <h6>{content}</h6>
+         <OrganizerProfile/>
         </div>
       </Content>
     </div>
