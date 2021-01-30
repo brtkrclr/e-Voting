@@ -45,14 +45,14 @@ export default class CreateVotingForm extends Component {
       options: this.state.options,
     };
     axios
-      .post("http://localhost:8080/vote", form)
+      .post("http://localhost:8081/vote", form)
       .then((response) => {
         console.log(response);
       })
       .catch((error) => {
         console.log(error);
-      });
-    //.then((resp) => (window.location.href = "/home"));
+      }) 
+      .then((resp) => (window.location.href = "/home"));
   };
 
   render() {
@@ -76,6 +76,8 @@ export default class CreateVotingForm extends Component {
       // Can not select days before today
       return current && current < moment().startOf("day");
     }
+
+
 
     return (
       <Layout className="layout">

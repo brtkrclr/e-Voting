@@ -3,6 +3,7 @@ import SignUp from "./auth/SignUp";
 import SignIn from "./auth/SignIn";
 import ForgotPasswordForm from "./auth/ForgotPasswordForm";
 import Home from "./home/Home";
+import HomeU from "./home/HomeU";
 import OrganizerProfile from "./organizer/OrganizerProfile";
 import UserHome from "./auth/BoardUser";
 import AdminHome from "./auth/BoardAdmin";
@@ -16,6 +17,7 @@ import BoardAdmin from "./auth/BoardAdmin";
 import BoardUser from "./auth/BoardUser";
 import BoardOrganizer from "./auth/BoardOrganizer";
 import Profile from "./Profile";
+import FilterSearches from "./filtersearch/FilterSearches";
 import Navbar from "./navbar/Navbar";
 
 const App = () => {
@@ -43,19 +45,21 @@ const App = () => {
           <Switch>
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/signin" component={SignIn} />
-            <Route exact path={["/", "/home"]} component={Home} />
+            <Route exact path={["/", "/homeU"]} component={HomeU} />
             <Route
               exact
               path="/forgotpasswordform"
               component={ForgotPasswordForm}
             />
             <Route path="/profile" component={Profile} />
+            <Route exact path={"/home"} component={Home}/>
             <Route path="/organizerprofile" component={OrganizerProfile} />
             <Route path="/organizer" component={BoardOrganizer} />
             <Route path="/user" component={BoardUser} />
             <Route path="/admin" component={BoardAdmin} />
             <Route path="/createvote" component={CreateVotingForm} />
-            <Route path="/editvoting" component={EditVoting} />
+            <Route path="/editvoting/:id" component={EditVoting} />
+            <Route path="/filtersearch" component={FilterSearches}/>
           </Switch>
         </div>
       </Router>

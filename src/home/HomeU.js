@@ -5,9 +5,10 @@ import "../App.css"
 import NavbarU from "../navbar/NavbarU";
 import { Typography } from "antd";
 import SignIn from "../auth/SignIn";
+import { Link } from "react-router-dom";
 import { Route, Router } from "react-router-dom";
 
-const { Text, Link } = Typography;
+const { Text} = Typography;
 const HomeU = () => {
   return (
     <Layout className="layout">
@@ -47,19 +48,19 @@ const HomeU = () => {
             <br />
 
             <div style={{ textAlign: "center" }}>
-              <Link to="/login">
-                <Button type="primary" style={{ fontSize: "18px" }}>
-                  Log In
-                </Button>
-              </Link>
+            <Link to="/signin">
+              <Button type="primary" >Log In</Button>
+            </Link>
               <br />
               <br />
               <h2 style={{ textAlign: "center" }}>
                 Don't have an account?
                 <br />
-                <a href={SignIn} style={{ fontSize: "18px" }}>
-                  <Text underline>Register</Text>
-                </a>
+                <Link to="/signup">
+                <Button type="text" >
+                 <Text underline style={{fontSize:"18px"}}> Sign Up</Text>
+                </Button>
+              </Link>
               </h2>
             </div>
           </div>

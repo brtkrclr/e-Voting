@@ -1,5 +1,5 @@
 import { Form, Input, Button, Checkbox, Alert, Radio } from "antd";
-import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
+import { UserOutlined, LockOutlined, MailOutlined, setTwoToneColor } from "@ant-design/icons";
 import "../App.css";
 import React, { useState, useRef } from "react";
 import Layout, { Content } from "antd/lib/layout/layout";
@@ -41,15 +41,15 @@ const SignUp = (props) => {
   const handleRegister = (e) => {
     e.preventDefault();
 
-    setMessage("Successfull");
+    setMessage("Successful");
     setSuccessful(false);
 
     AuthService.register(username, email, password, roles).then(
       
-      (response) => {
-        setMessage(response.data.message);
-        setSuccessful(true);
-        
+      (response) => { 
+
+        setMessage(response.data.message);  
+        setSuccessful(true);        
       },
       (error) => {
         const resMessage =
@@ -171,7 +171,7 @@ const SignUp = (props) => {
               </Form.Item>
 
               <Form.Item>
-                <Alert message={message} type={successful} />
+                <Alert message={message} type={successful} style={{color: "green"}} />
               </Form.Item>
             </Form>
             

@@ -65,7 +65,7 @@ const Navbar = () => {
 
       </div>
       <Menu.Item icon={<CloseOutlined />}>
-        <Link to="/home">
+        <Link to="/homeU">
           <a
             target="_blank"
             rel="noopener noreferrer"

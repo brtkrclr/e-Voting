@@ -1,13 +1,17 @@
-import { Button, Menu } from "antd";
+import {Breadcrumb, Button, Menu, Radio} from "antd";
 import Layout, { Content } from "antd/lib/layout/layout";
 import React, {Component} from "react";
-import "../App.css"
+import "../App.css";
 import { Typography } from 'antd';
 import Navbar from "../navbar/Navbar";
 import Sider from "antd/es/layout/Sider";
 import axios from "axios";
-import {Row, Col} from 'antd';
+import {Checkbox, Row, Col} from 'antd';
 const { Text, Link } = Typography;
+
+function onChange(checkedValues) {
+    console.log('checked = ', checkedValues);
+}
 
 export default class FilterSearches extends Component{
     constructor(props) {
@@ -24,7 +28,20 @@ export default class FilterSearches extends Component{
     }
 
 
+    onChange = e => {
+        console.log('radio checked', e.target.value);
+        this.setState({
+            value: e.target.value,
+        });
+    };
+
     render(){
+        const radioStyle = {
+            display: 'block',
+            height: '30px',
+            lineHeight: '30px',
+        };
+
         const { collapsed } = this.state;
         return (
 
@@ -34,26 +51,58 @@ export default class FilterSearches extends Component{
 
                 <div style={{ marginTop: "50px" }}>
 
-                    <Content style={{ padding: "0 50px" }}>
+                    <Content style={{ padding: "50px"}}>
+
+                        <Breadcrumb.Item>Search</Breadcrumb.Item>
+                        <Breadcrumb.Item>Results</Breadcrumb.Item>
 
                         <div className="site-layout-content">
-<Row>
-                            <Col span={12}>
+                          <Row>
+                            <Col span={5}>
                                 <Menu defaultSelectedKeys={['filter']}  >
-                                    <h1>Filter</h1>
+                                    <h3 style={{color: 'cornflowerblue', fontFamily: 'revert'}}>Filter Options: </h3>
+
+                                    <br />
+                                    <Menu.Item
+                                        name="votingMethod"
+                                        rules={[{ required: true, message: "Please input!" }]}
+                                    >
+                                        <Radio.Group name="radiogroup">
+                                            <Radio style={radioStyle}
+                                                value={1}
+                                                onChange={(text) =>
+                                                    this.setState({ votingMethod: text.target.value })
+                                                }
+                                            >
+                                                Participatory
+                                            </Radio>
+                                            <Radio style={radioStyle}
+                                                value={2}
+                                                onChange={(text) =>
+                                                    this.setState({ votingMethod: text.target.value })
+                                                }
+                                            >
+                                                Educational
+                                            </Radio>
+                                            <Radio style={radioStyle}
+                                                value={3}
+                                                onChange={(text) =>
+                                                    this.setState({ votingMethod: text.target.value })
+                                                }
+                                            >
+                                                Political
+                                            </Radio>
+                                        </Radio.Group>
+
+                                    </Menu.Item>
                                     <Menu.Item>
-                                        <Button>Personal</Button>
+                                        <Button type="primary" style={{fontFamily: 'revert', background: 'cornflowerblue'}}>FILTER</Button>
                                     </Menu.Item>
-                                    <Menu.Item >
-                                        <Button>Student</Button>
-                                    </Menu.Item>
-                                    <Menu.Item>
-                                        <Button>Political</Button>
-                                    </Menu.Item>
+
                                 </Menu>
                             </Col>
                             <Col span={12}>
-                                <h1>hi</h1>
+                                <d>Search and Filter Results</d>
                             </Col>
 </Row>
                         </div>

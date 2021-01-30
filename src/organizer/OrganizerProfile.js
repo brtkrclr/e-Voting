@@ -124,8 +124,8 @@ export default class OrganizerProfile extends Component {
                       title={<a href="https://ant.design">{vote.title}</a>}
                       description={vote.description}
                     />
-                    <Link to="/editvoting">
-                      <Button tpye="primary" success>
+                    <Link to={"/editvoting/" + vote.id}>
+                      <Button type="primary" success>
                         <EditOutlined />
                       </Button>
                     </Link>

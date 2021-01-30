@@ -29,7 +29,7 @@ const Home = () => {
   }, []);
   return (
       <Layout className="layout">
-        <NavbarU/>
+        <Navbar/>
         <div style={{ marginTop: "50px" }}>
         <Content style={{ padding: "0 50px" }}>
           <div className="site-layout-content">
@@ -63,22 +63,7 @@ const Home = () => {
             </p>
             <br />
 
-            <div style={{ textAlign: "center" }}>
-            <Link to="/signin">
-              <Button type="primary" >Log In</Button>
-            </Link>
-              <br />
-              <br />
-              <h2 style={{ textAlign: "center" }}>
-                Don't have an account?
-                <br />
-                <Link to="/signup">
-                <Button type="text" >
-                 <Text underline style={{fontSize:"18px"}}> Sign Up</Text>
-                </Button>
-              </Link>
-              </h2>
-            </div>
+      
           </div>
         </Content>
         </div>
