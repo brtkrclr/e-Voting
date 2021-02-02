@@ -26,7 +26,7 @@ export default class EditVoting extends Component {
       organizer: this.state.organizer,
       startDate: this.state.startDate,
       endDate: this.state.endDate,
-      votingMethod: this.state.votingMethod,
+      votingType: this.state.votingType,
       accessType: this.state.accessType,
       options: this.state.options,
     };
@@ -55,7 +55,7 @@ export default class EditVoting extends Component {
       organizer,
       startDate,
       endDate,
-      votingMethod,
+      votingType,
       accessType,
       options,
     } = this.state;
@@ -128,16 +128,42 @@ export default class EditVoting extends Component {
                     />
                   </Form.Item>
 
-                  <Text>VOTING METHOD</Text>
-                  <Form.Item
-                    name="method"
-                    rules={[{ required: true, message: "Please input!" }]}
-                  >
-                    <Radio.Group name="radiogroup">
-                      <Radio.Button value={1}>Single</Radio.Button>
-                      <Radio.Button value={2}>Multiple</Radio.Button>
-                    </Radio.Group>
-                  </Form.Item>
+                  <Text>TYPE OF VOTING</Text>
+                <Form.Item
+                  required
+                  name="votingType"
+                  rules={[{ required: true, message: "Please input!" }]}
+                >
+                  <Radio.Group name="radiogroup">
+                    <Radio.Button
+                      value={1}
+                      disabled
+                      onChange={(text) =>
+                        this.setState({ votingType: text.target.value })
+                      }
+                    >
+                      Participatory
+                    </Radio.Button>
+                    <Radio.Button
+                      value={2}
+                      disabled
+                      onChange={(text) =>
+                        this.setState({ votingType: text.target.value })
+                      }
+                    >
+                      Educational
+                    </Radio.Button>
+                    <Radio.Button
+                      value={3}
+                      disabled
+                      onChange={(text) =>
+                        this.setState({ votingType: text.target.value })
+                      }
+                    >
+                      Political
+                    </Radio.Button>
+                  </Radio.Group>
+                </Form.Item>
 
                   <Text>ACCESS TYPE</Text>
                   <Form.Item

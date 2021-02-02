@@ -6,6 +6,7 @@ import Home from "./home/Home";
 import HomeU from "./home/HomeU";
 import OrganizerProfile from "./organizer/OrganizerProfile";
 import UserHome from "./auth/BoardUser";
+import GiveVote from "./user/GiveVote";
 import AdminHome from "./auth/BoardAdmin";
 import CreateVotingForm from "./voting/CreateVotingForm";
 import EditVoting from "./voting/EditVoting";
@@ -60,6 +61,7 @@ const App = () => {
             <Route path="/createvote" component={CreateVotingForm} />
             <Route path="/editvoting/:id" component={EditVoting} />
             <Route path="/filtersearch" component={FilterSearches}/>
+            <Route path="/givevote" component={GiveVote}/>
           </Switch>
         </div>
       </Router>

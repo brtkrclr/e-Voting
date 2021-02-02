@@ -1,4 +1,13 @@
-import { Button, DatePicker, Divider, Form, Input, Radio, Switch } from "antd";
+import {
+  Button,
+  DatePicker,
+  Divider,
+  Form,
+  Input,
+  Radio,
+  Space,
+  Switch,
+} from "antd";
 import Layout, { Content } from "antd/lib/layout/layout";
 import React, { Component } from "react";
 import "../App.css";
@@ -25,14 +34,15 @@ export default class CreateVotingForm extends Component {
     organizer: "",
     startDate: "",
     endDate: "",
-    votingMethod: "",
+    votingType: "",
     accessType: "",
     options: [],
   };
 
   submitForm = (event) => {
-    alert("Successfully Created");
+    // alert("Successfully Created");
     console.log(this.state);
+    console.log(event.options)
     const form = {
       id: this.state.id,
       title: this.state.title,
@@ -40,10 +50,11 @@ export default class CreateVotingForm extends Component {
       organizer: this.state.organizer,
       startDate: this.state.startDate,
       endDate: this.state.endDate,
-      votingMethod: this.state.votingMethod,
+      votingType: this.state.votingType,
       accessType: this.state.accessType,
-      options: this.state.options,
+      options: event.options,
     };
+    console.log(form)
     axios
       .post("http://localhost:8081/vote", form)
       .then((response) => {
@@ -51,8 +62,8 @@ export default class CreateVotingForm extends Component {
       })
       .catch((error) => {
         console.log(error);
-      }) 
-      .then((resp) => (window.location.href = "/home"));
+      });
+    // .then((resp) => (window.location.href = "/home"));
   };
 
   render() {
@@ -63,7 +74,7 @@ export default class CreateVotingForm extends Component {
       organizer,
       startDate,
       endDate,
-      votingMethod,
+      votingType,
       accessType,
       options,
     } = this.state;
@@ -76,8 +87,6 @@ export default class CreateVotingForm extends Component {
       // Can not select days before today
       return current && current < moment().startOf("day");
     }
-
-
 
     return (
       <Layout className="layout">
@@ -100,10 +109,10 @@ export default class CreateVotingForm extends Component {
                 <Form.Item
                   required
                   name="title"
+                  value={title}
                   rules={[{ required: true, message: "Please input!" }]}
                 >
                   <Input
-                    value={title}
                     onChange={(text) =>
                       this.setState({ title: text.target.value })
                     }
@@ -114,10 +123,10 @@ export default class CreateVotingForm extends Component {
                 <Form.Item
                   required
                   name="description"
+                  value={description}
                   rules={[{ required: true, message: "Please input!" }]}
                 >
                   <Input
-                    value={description}
                     onChange={(text) =>
                       this.setState({ description: text.target.value })
                     }
@@ -128,10 +137,11 @@ export default class CreateVotingForm extends Component {
                 <Form.Item
                   required
                   name="organizer"
+                  value={organizer}
                   rules={[{ required: true, message: "Please input!" }]}
                 >
                   <Input
-                    value={organizer}
+                   
                     onChange={(text) =>
                       this.setState({ organizer: text.target.value })
                     }
@@ -141,6 +151,7 @@ export default class CreateVotingForm extends Component {
                 <Form.Item
                   required
                   name="startDate"
+                  value={this.state.startDate}
                   rules={[{ required: true, message: "Please input!" }]}
                 >
                   <DatePicker
@@ -148,7 +159,7 @@ export default class CreateVotingForm extends Component {
                     format="YYYY-MM-DD "
                     disabledDate={disabledDate}
                     onChange={(startDate) => this.setState({ startDate })}
-                    value={this.state.startDate}
+                   
                   />
                 </Form.Item>
 
@@ -156,6 +167,7 @@ export default class CreateVotingForm extends Component {
                 <Form.Item
                   required
                   name="endDate"
+                  value={this.state.endDate}
                   rules={[{ required: true, message: "Please input!" }]}
                 >
                   <DatePicker
@@ -164,21 +176,21 @@ export default class CreateVotingForm extends Component {
                     defaultDate={this.state.startDate}
                     disabledDate={disabledDate}
                     onChange={(endDate) => this.setState({ endDate })}
-                    value={this.state.endDate}
+                   
                   />
                 </Form.Item>
 
                 <Text>TYPE OF VOTING</Text>
                 <Form.Item
                   required
-                  name="votingMethod"
+                  name="votingType"
                   rules={[{ required: true, message: "Please input!" }]}
                 >
                   <Radio.Group name="radiogroup">
                     <Radio.Button
                       value={1}
                       onChange={(text) =>
-                        this.setState({ votingMethod: text.target.value })
+                        this.setState({ votingType: text.target.value })
                       }
                     >
                       Participatory
@@ -186,7 +198,7 @@ export default class CreateVotingForm extends Component {
                     <Radio.Button
                       value={2}
                       onChange={(text) =>
-                        this.setState({ votingMethod: text.target.value })
+                        this.setState({ votingType: text.target.value })
                       }
                     >
                       Educational
@@ -194,7 +206,7 @@ export default class CreateVotingForm extends Component {
                     <Radio.Button
                       value={3}
                       onChange={(text) =>
-                        this.setState({ votingMethod: text.target.value })
+                        this.setState({ votingType: text.target.value })
                       }
                     >
                       Political
@@ -229,79 +241,44 @@ export default class CreateVotingForm extends Component {
                 </Form.Item>
 
                 <Text>OPTIONS</Text>
-                <Form.Item name="options">
-                  <Form.List
-                    name="names"
-                    rules={[
-                      {
-                        validator: async (_, names) => {
-                          if (!names || names.length < 2) {
-                            return Promise.reject(
-                              new Error("At least 2 options")
-                            );
-                          }
-                        },
-                      },
-                    ]}
-                  >
-                    {(fields, { add, remove }, { errors }) => (
-                      <>
-                        {fields.map((field, index) => (
+                <Form.List name="options">
+                  {(fields, { add, remove }) => (
+                    <>
+                      {fields.map((field) => (
+                        <Space
+                          key={field.key}
+                          style={{ display: "flex", marginBottom: 8 }}
+                          align="baseline"
+                        >
                           <Form.Item
-                            {...(index === 0)}
-                            required={false}
-                            key={field.key}
+                            {...field}
+                            name={[field.name]}
+                            rules={[
+                              { required: true, message: "Missing option " },
+                            ]}
                           >
-                            <Form.Item
-                              {...field}
-                              validateTrigger={["onChange", "onBlur"]}
-                              rules={[
-                                {
-                                  required: true,
-                                  whitespace: true,
-                                  message:
-                                    "Please input options's name or delete this field.",
-                                },
-                              ]}
-                              noStyle
-                            >
-                              <Input
-                                placeholder="option name"
-                                style={{ width: "60%" }}
-                                value={options}
-                                onChange={(text) =>
-                                  this.setState({
-                                    options: [...options, text.target.value],
-                                  })
-                                }
-                              />
-                            </Form.Item>
-                            {fields.length > 1 ? (
-                              <MinusCircleOutlined
-                                style={{ margin: "5px" }}
-                                className="dynamic-delete-button"
-                                onClick={() => remove(field.name)}
-                              />
-                            ) : null}
+                            <Input placeholder="Option" />
                           </Form.Item>
-                        ))}
 
-                        <Form.Item>
-                          <Button
-                            type="dashed"
-                            onClick={() => add()}
-                            style={{ width: "60%" }}
-                            icon={<PlusOutlined />}
-                          >
-                            Add Options
-                          </Button>
-
-                          <Form.ErrorList errors={errors} />
-                        </Form.Item>
-                      </>
-                    )}
-                  </Form.List>
-                </Form.Item>
+                          <MinusCircleOutlined
+                            onClick={() => remove(field.name)}
+                          />
+                        </Space>
+                      ))}
+                      <Form.Item>
+                        <Button
+                          type="dashed"
+                          onClick={() => add()}
+                          block
+                          icon={<PlusOutlined />}
+                          style={{ width: "70%" }}
+                        >
+                          Add field
+                        </Button>
+                      </Form.Item>
+                    </>
+                  )}
+                </Form.List>
 
                 <Form.Item>
                   <Button

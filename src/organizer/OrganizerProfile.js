@@ -32,9 +32,6 @@ export default class OrganizerProfile extends Component {
       .then((data) => {
         this.setState({ votings: data });
       });
-
-     
-
   }
 
   deleteVoting = (id) => {
