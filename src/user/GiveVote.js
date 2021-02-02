@@ -4,7 +4,7 @@ import "../App.css";
 import Navbar from "../navbar/Navbar";
 import axios from "axios";
 import { Divider, Space, Table, List, Radio, Input } from "antd";
-import { PageHeader, Descriptions } from 'antd';
+import { PageHeader } from 'antd';
 import { Popconfirm, message, Button } from 'antd';
 import { Link } from "react-router-dom";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
@@ -26,12 +26,12 @@ export default class GiveVote extends Component {
 
     componentDidMount() {
         axios
-          .get("http://localhost:8081/vote")
-          .then((response) => response.data)
-          .then((data) => {
-            this.setState({ votings: data });
-          });
-      }
+            .get("http://localhost:8081/vote")
+            .then((response) => response.data)
+            .then((data) => {
+                this.setState({ votings: data });
+            });
+    }
 
     onChange = e => {
         console.log('radio checked', e.target.value);
@@ -55,71 +55,82 @@ export default class GiveVote extends Component {
                 key: "selectRadio",
                 render: (text) => (
                     <Input type="radio" value={text} name="Select one of them">
-                      {text}
+                        {text}
                     </Input>
-                  )
+                )
             }];
 
-            const data = [
-                {
-                    type: 'Option 1',
-            
-                },
-                {
-                    type: 'Option 2',
-                },
-                {
-                    type: 'Option 3',
-                },
-                
-            ];
-            return (
+        const data = [
+            {
+                type: 'Option 1',
+
+            },
+            {
+                type: 'Option 2',
+            },
+            {
+                type: 'Option 3',
+            },
+
+        ];
+        return (
             <Layout className="layout">
-                <Navbar/>
-                <div style={{marginTop: "10px"}}>
-                    <Content style={{padding: "30px"}}>
+                <Navbar />
+                <div style={{ marginTop: "10px" }}>
+                    <Content style={{ padding: "30px" }}>
                         <div className="site-layout-content">
 
                             <div className="site-page-header-ghost-wrapper">
-                            <List itemLayout="horizontal">
-                {this.state.votings.map((vote) => (
-                    <PageHeader   
-                    title={vote.title}
-                    >
-                         <List.Item.Meta
-                      description={vote.description}
-                    
-                    />
-              
-              <Table
-                            columns={OptionsColumns}
-                            dataSource={vote.options}
-                            size="small"
-                            pagination={false}
-                            />
-                            <Popconfirm
-                                placement="bottomLeft"
-                                title={text}
-                                onConfirm={confirm}
-                                okText="Yes"
-                                cancelText="No"
-                            >
-                                <Button type="primary" block>
-                                    SUBMIT
+                                <List itemLayout="horizontal">
+                                    {this.state.votings.map((vote) => (
+                                        <PageHeader
+                                            title={vote.title}
+                                        >
+                                            <List.Item.Meta
+                                                description={vote.description}
+
+                                            />
+
+                                            <ul>
+                                                {this.state.votings.map((vote) => (
+                                                    <ul>
+                                                        {(vote?.options ?? []).map((option) => (
+                                                            <Button
+                                                                onClick={() => console.log("clicked!", option)}
+                                                            >
+                                                                {option}
+                                                            </Button>
+                                                        ))}
+                                                    </ul>
+                                                ))}
+                                            </ul>
+
+
+                                            <Popconfirm
+                                                placement="bottomLeft"
+                                                title={text}
+                                                onConfirm={confirm}
+                                                okText="Yes"
+                                                cancelText="No"
+                                            >
+                                                <Link to="/voteresult">
+                                                <Button type="primary" htmlType="submit" block>
+                                                    SUBMIT
                                 </Button>
-                            </Popconfirm>
-                    </PageHeader>
-                
-                   
-                ))}
-              </List>
+                                </Link>
+                                            </Popconfirm>
+                                        </PageHeader>
+
+
+                                    ))}
+                                </List>
                             </div>
-                           
+
                         </div>
 
                     </Content>
                 </div>
-                <Footer style={{textAlign: "center"}}>©️2021 BallotBox</Footer>
+                <Footer style={{ textAlign: "center" }}>©️2021 BallotBox</Footer>
             </Layout>
         );
 

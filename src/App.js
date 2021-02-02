@@ -18,6 +18,8 @@ import BoardAdmin from "./auth/BoardAdmin";
 import BoardUser from "./auth/BoardUser";
 import BoardOrganizer from "./auth/BoardOrganizer";
 import Profile from "./Profile";
+import VoteResult from "./user/VoteResult";
+import UserProfile from "./user/UserProfile";
 import FilterSearches from "./filtersearch/FilterSearches";
 import Navbar from "./navbar/Navbar";
 
@@ -62,6 +64,8 @@ const App = () => {
             <Route path="/editvoting/:id" component={EditVoting} />
             <Route path="/filtersearch" component={FilterSearches}/>
             <Route path="/givevote" component={GiveVote}/>
+            <Route path="/voteresult" component={VoteResult}/>
+            <Route path="/userprofile" component={UserProfile}/>
           </Switch>
         </div>
       </Router>

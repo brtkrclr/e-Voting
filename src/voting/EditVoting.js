@@ -18,7 +18,7 @@ export default class EditVoting extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount(id) {
     const form = {
       id: this.state.id,
       title: this.state.title,
@@ -27,16 +27,20 @@ export default class EditVoting extends Component {
       startDate: this.state.startDate,
       endDate: this.state.endDate,
       votingType: this.state.votingType,
-      accessType: this.state.accessType,
       options: this.state.options,
-    };
-    axios
-      .get("http://localhost:8081/vote")
+    }; 
+
+ axios
+      .get("http://localhost:8081/vote",{
+        params:{
+          id:form.id
+        }
+      })
       .then((response) => response.data)
       .then((data) => {
+        console.log(form.id)
         this.setState({ votings: data });
       });
-
     axios
       .post("http://localhost:8081/vote", form)
       .then((response) => {
@@ -56,7 +60,6 @@ export default class EditVoting extends Component {
       startDate,
       endDate,
       votingType,
-      accessType,
       options,
     } = this.state;
 
@@ -165,16 +168,7 @@ export default class EditVoting extends Component {
                   </Radio.Group>
                 </Form.Item>
 
-                  <Text>ACCESS TYPE</Text>
-                  <Form.Item
-                    name="accessType"
-                    rules={[{ required: true, message: "Please input!" }]}
-                  >
-                    <Radio.Group name="radiogroup2">
-                      <Radio.Button value={1}>E-mail</Radio.Button>
-                      <Radio.Button value={2}>Public</Radio.Button>
-                    </Radio.Group>
-                  </Form.Item>
+            
 
                   <Text>OPTIONS</Text>
                   <ul>

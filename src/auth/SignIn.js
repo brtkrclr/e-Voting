@@ -47,7 +47,7 @@ const SignIn = (props) => {
     AuthService.login(username, password).then(
       (response) => {
         if((response && response.roles && response.roles[0] === "ROLE_USER")){
-          props.history.push("/user");
+          props.history.push("/givevote");
           window.location.reload();
         }else if((response && response.roles && response.roles[0] === "ROLE_ADMIN")){
           props.history.push("/admin");

@@ -18,7 +18,6 @@ import moment from "moment";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { Link, Route } from "react-router-dom";
 const { RangePicker } = DatePicker;
-
 const { Text } = Typography;
 export default class CreateVotingForm extends Component {
   constructor(props) {
@@ -35,7 +34,6 @@ export default class CreateVotingForm extends Component {
     startDate: "",
     endDate: "",
     votingType: "",
-    accessType: "",
     options: [],
   };
 
@@ -51,7 +49,6 @@ export default class CreateVotingForm extends Component {
       startDate: this.state.startDate,
       endDate: this.state.endDate,
       votingType: this.state.votingType,
-      accessType: this.state.accessType,
       options: event.options,
     };
     console.log(form)
@@ -75,7 +72,6 @@ export default class CreateVotingForm extends Component {
       startDate,
       endDate,
       votingType,
-      accessType,
       options,
     } = this.state;
 
@@ -214,31 +210,6 @@ export default class CreateVotingForm extends Component {
                   </Radio.Group>
                 </Form.Item>
 
-                <Text>ACCESS TYPE</Text>
-                <Form.Item
-                  required
-                  name="accessType"
-                  rules={[{ required: true, message: "Please input!" }]}
-                >
-                  <Radio.Group name="radiogroup2">
-                    <Radio.Button
-                      value={1}
-                      onChange={(text) =>
-                        this.setState({ accessType: text.target.value })
-                      }
-                    >
-                      E-mail
-                    </Radio.Button>
-                    <Radio.Button
-                      value={2}
-                      onChange={(text) =>
-                        this.setState({ accessType: text.target.value })
-                      }
-                    >
-                      Public
-                    </Radio.Button>
-                  </Radio.Group>
-                </Form.Item>
 
                 <Text>OPTIONS</Text>
                 <Form.List name="options">
