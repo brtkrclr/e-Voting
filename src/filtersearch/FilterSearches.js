@@ -51,10 +51,7 @@ export default class FilterSearches extends Component{
 
                 <div style={{ marginTop: "50px" }}>
 
-                    <Content style={{ padding: "50px"}}>
-
-                        <Breadcrumb.Item>Search</Breadcrumb.Item>
-                        <Breadcrumb.Item>Results</Breadcrumb.Item>
+                    <Content style={{ padding: "0 50px"}}>
 
                         <div className="site-layout-content">
                           <Row>
@@ -95,6 +92,7 @@ export default class FilterSearches extends Component{
                                         </Radio.Group>
 
                                     </Menu.Item>
+                                    <br/>
                                     <Menu.Item>
                                         <Button type="primary" style={{fontFamily: 'revert', background: 'cornflowerblue'}}>FILTER</Button>
                                     </Menu.Item>

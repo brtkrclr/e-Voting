@@ -32,6 +32,9 @@ export default class OrganizerProfile extends Component {
       .then((data) => {
         this.setState({ votings: data });
       });
+
+     
+
   }
 
   deleteVoting = (id) => {
@@ -57,7 +60,6 @@ export default class OrganizerProfile extends Component {
         dataIndex: "votingmethod",
         key: "voting method",
       },
-      { title: "Access Type", dataIndex: "accesstype", key: "accesstype" },
       {
         title: "Edit or Delete",
         dataIndex: "",
@@ -95,7 +97,6 @@ export default class OrganizerProfile extends Component {
         name: "Voting",
         date: 0,
         votingmethod: "Voting Method",
-        accesstype: "Access Type",
 
         description: "Description of the voting and options",
       },

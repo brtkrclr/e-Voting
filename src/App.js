@@ -22,6 +22,7 @@ import VoteResult from "./user/VoteResult";
 import UserProfile from "./user/UserProfile";
 import FilterSearches from "./filtersearch/FilterSearches";
 import Navbar from "./navbar/Navbar";
+import ResetPasswordForm from "./auth/ResetPasswordForm";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -66,6 +67,7 @@ const App = () => {
             <Route path="/givevote" component={GiveVote}/>
             <Route path="/voteresult" component={VoteResult}/>
             <Route path="/userprofile" component={UserProfile}/>
+            <Route path="/resetpassword" component={ResetPasswordForm}/>
           </Switch>
         </div>
       </Router>

@@ -32,7 +32,7 @@ export default class UserProfile extends Component {
 
   componentDidMount() {
     axios
-      .post("localhost:8080/vote/post")
+      .post("localhost:8081/vote/post")
       .then((response) => console.log(response.data));
   }
 
