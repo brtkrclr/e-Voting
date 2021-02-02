@@ -1,0 +1,22 @@
+
+@import "~antd/dist/antd.css";
+.site-layout-content {
+  min-height: 500px;
+  padding: 24px;
+  background: #fff;
+}
+
+.container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  border: 0.5px white;
+  padding: 60px 60px 40px 60px;
+  background-color: white;
+  box-shadow: 5px 10px 10px darkgray;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
