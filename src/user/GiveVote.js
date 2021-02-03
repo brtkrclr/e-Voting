@@ -20,29 +20,52 @@ export default class GiveVote extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            votings: [],
+          votings: [],
+          vote: { }
         };
-    }
+      }
+    async componentDidMount() {
+        const vid = this.props.match.params.id;
 
-    componentDidMount() {
-        axios
-            .get("http://localhost:8081/vote")
-            .then((response) => response.data)
-            .then((data) => {
-                this.setState({ votings: data });
-            });
-    }
-
-    onChange = e => {
-        console.log('radio checked', e.target.value);
-        this.setState({
-            value: e.target.value,
-        });
-    };
+    console.log(this.props.match.params.id,'asdas')
+        console.log(vid);
+        const form = {
+          id: this.state.id,
+          title: this.state.title,
+          description: this.state.description,
+          organizer: this.state.organizer,
+          startDate: this.state.startDate,
+          endDate: this.state.endDate,
+          votingType: this.state.votingType,
+          options: this.state.options,
+        }; 
+       
+     await axios
+          .get(`http://localhost:8081/vote/` + vid )
+          .then((response) => response.data)
+          .then((data) => {
+            console.log(form.id)
+            this.setState({ vote: data });
+          }); 
+     
+      
+      }
+    
+ 
 
 
     render() {
-
+        const {
+            id,
+            title,
+            description,
+            organizer,
+            startDate,
+            endDate,
+            votingType,
+            options,
+            vote
+          } = this.state;
         const OptionsColumns = [
             {
                 title: "",

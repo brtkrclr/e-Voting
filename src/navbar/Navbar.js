@@ -104,7 +104,7 @@ const Navbar = () => {
         <Col span={8} className="searchBar" style={{ color: "white" }}>
           <div style={{ marginTop: "15px" }}>
             <Search
-              placeholder="input search text"
+              placeholder="Search"
               onSearch={onSearch}
               enterButton
             />

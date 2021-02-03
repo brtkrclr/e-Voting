@@ -119,7 +119,7 @@ export default class OrganizerProfile extends Component {
                 {this.state.votings.map((vote) => (
                   <List.Item>
                     <List.Item.Meta
-                      title={<a href="https://ant.design">{vote.title}</a>}
+                      title={vote.title}
                       description={vote.description}
                     />
                     <Link to={"/editvoting/" + vote.id}>

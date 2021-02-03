@@ -22,6 +22,7 @@ export default class EditVoting extends Component {
   }
 async componentDidMount() {
     const vid = this.props.match.params.id;
+    console.log(vid);
     const form = {
       id: this.state.id,
       title: this.state.title,

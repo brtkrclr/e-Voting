@@ -59,7 +59,7 @@ export default class UserProfile extends Component {
             <Descriptions.Item>burda verdiği oylar listelencek</Descriptions.Item>
                 </Descriptions>
                 <br/><br></br>
-                <Link to="/givevote">
+                <Link to="/allvotings">
                 <Button style={{alignItems:"left"}}>
   Votings Page
 </Button>

@@ -24,6 +24,7 @@ import FilterSearches from "./filtersearch/FilterSearches";
 import Navbar from "./navbar/Navbar";
 import ResetPasswordForm from "./auth/ResetPasswordForm";
 import ChangePasswordForm from "./auth/ChangePasswordForm";
+import AllVotings from "./user/AllVotings";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -70,6 +71,7 @@ const App = () => {
             <Route path="/userprofile" component={UserProfile}/>
             <Route path="/resetpasswordform" component={ResetPasswordForm}/>          
             <Route exact path="/changepasswordform" component={ChangePasswordForm}/>
+            <Route path="/allvotings" component={AllVotings}/>
           </Switch>
         </div>
       </Router>
