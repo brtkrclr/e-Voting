@@ -38,7 +38,7 @@ export default class CreateVotingForm extends Component {
   };
 
   submitForm = (event) => {
-    // alert("Successfully Created");
+    alert("Successfully Created");
     console.log(this.state);
     console.log(event.options)
     const form = {

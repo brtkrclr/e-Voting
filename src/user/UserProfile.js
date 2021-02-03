@@ -54,30 +54,9 @@ export default class UserProfile extends Component {
               <h2 style={{ textAlign: "left" }}>Profile</h2>
               <Divider style={{ color: "gray" }} />
               <div style={{ textAlign: "center" }}>
-                <Avatar size={64} icon={<UserOutlined />} />
 
-                <Descriptions title="User Info" layout="vertical">
-                  <Descriptions.Item
-                    label="First Name"
-                    labelStyle={{ fontWeight: "bold", fontSize: "16px" }}
-                  >
-                    Name of the user
-                  </Descriptions.Item>
-
-                  <Descriptions.Item
-                    label="Last Name"
-                    labelStyle={{ fontWeight: "bold", fontSize: "16px" }}
-                  >
-                    Surname of the user
-                  </Descriptions.Item>
-               
-
-                  <Descriptions.Item
-                    label="E-mail"
-                    labelStyle={{ fontWeight: "bold", fontSize: "16px" }}
-                  >
-                    ballotbox@info.com
-                  </Descriptions.Item>
+                <Descriptions title="Your Votes" layout="vertical">
+            <Descriptions.Item>burda verdiği oylar listelencek</Descriptions.Item>
                 </Descriptions>
                 <br/><br></br>
                 <Link to="/givevote">

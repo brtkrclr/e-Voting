@@ -105,7 +105,7 @@ export default class GiveVote extends Component {
                                                 ))}
                                             </ul>
 
-
+                                            <Link to="/voteresult">
                                             <Popconfirm
                                                 placement="bottomLeft"
                                                 title={text}
@@ -113,12 +113,13 @@ export default class GiveVote extends Component {
                                                 okText="Yes"
                                                 cancelText="No"
                                             >
-                                                <Link to="/voteresult">
+                                                
                                                 <Button type="primary" htmlType="submit" block>
                                                     SUBMIT
                                 </Button>
-                                </Link>
+                           
                                             </Popconfirm>
+                                            </Link>
                                         </PageHeader>
 
 
