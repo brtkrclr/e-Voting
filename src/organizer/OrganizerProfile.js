@@ -32,14 +32,12 @@ export default class OrganizerProfile extends Component {
       .then((data) => {
         this.setState({ votings: data });
       });
-
-     
-
   }
 
   deleteVoting = (id) => {
+    console.log(id)
     axios
-      .delete("http://localhost:8081/vote/{id}" + this.state.id)
+      .delete("http://localhost:8081/vote/" + id)
       .then((response) => {
         if (response.data != null) {
           this.setState({ show: true });
@@ -60,6 +58,7 @@ export default class OrganizerProfile extends Component {
         dataIndex: "votingmethod",
         key: "voting method",
       },
+      { title: "Access Type", dataIndex: "accesstype", key: "accesstype" },
       {
         title: "Edit or Delete",
         dataIndex: "",
@@ -97,6 +96,7 @@ export default class OrganizerProfile extends Component {
         name: "Voting",
         date: 0,
         votingmethod: "Voting Method",
+        accesstype: "Access Type",
 
         description: "Description of the voting and options",
       },
@@ -130,7 +130,8 @@ export default class OrganizerProfile extends Component {
                     <Button
                       type="primary"
                       danger
-                      onClick={this.deleteVoting.bind(this, vote.id)}
+                      onClick={this.deleteVoting.bind(this,vote.id)}
+                
                     >
                       <DeleteOutlined />
                     </Button>

@@ -68,7 +68,7 @@ const App = () => {
             <Route path="/givevote" component={GiveVote}/>
             <Route path="/voteresult" component={VoteResult}/>
             <Route path="/userprofile" component={UserProfile}/>
-            <Route path="/resetpassword" component={ResetPasswordForm}/>          
+            <Route path="/resetpasswordform" component={ResetPasswordForm}/>          
             <Route exact path="/changepasswordform" component={ChangePasswordForm}/>
           </Switch>
         </div>

@@ -2,7 +2,7 @@ import { Divider } from "antd";
 import Layout, { Content, Footer } from "antd/lib/layout/layout";
 import React, { useState, useEffect } from "react";
 import Navbar from "../navbar/Navbar";
-
+import UserProfile from "../user/UserProfile";
 import UserService from "../services/user.service";
 
 const BoardUser = () => {
@@ -34,6 +34,7 @@ const BoardUser = () => {
           <Divider style={{ color: "gray" }} />
 
          <h6>{content}</h6>
+         <UserProfile/>
         </div>
       </Content>
     </div>

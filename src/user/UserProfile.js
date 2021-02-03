@@ -19,8 +19,10 @@ import {
   PlusOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+
+import { Link } from "react-router-dom";
 import Avatar from "antd/lib/avatar/avatar";
-const { Text, Link } = Typography;
+const { Text } = Typography;
 
 export default class UserProfile extends Component {
   constructor(props) {
@@ -46,10 +48,8 @@ export default class UserProfile extends Component {
     };
     return (
       <Layout className="layout">
-        <Navbar />
+     
 
-        <div style={{ marginTop: "50px" }}>
-          <Content style={{ padding: "0 50px" }}>
             <div className="site-layout-content">
               <h2 style={{ textAlign: "left" }}>Profile</h2>
               <Divider style={{ color: "gray" }} />
@@ -70,6 +70,7 @@ export default class UserProfile extends Component {
                   >
                     Surname of the user
                   </Descriptions.Item>
+               
 
                   <Descriptions.Item
                     label="E-mail"
@@ -78,10 +79,16 @@ export default class UserProfile extends Component {
                     ballotbox@info.com
                   </Descriptions.Item>
                 </Descriptions>
+                <br/><br></br>
+                <Link to="/givevote">
+                <Button style={{alignItems:"left"}}>
+  Votings Page
+</Button>
+</Link>
               </div>
             </div>
-          </Content>
-        </div>
+            
+      
       </Layout>
     );
   }

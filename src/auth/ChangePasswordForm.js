@@ -117,8 +117,7 @@ export default class ChangePasswordForm extends Component {
                               >
                                   <Input
                                       placeholder="Current Password"
-                                      prefix={<LockOutlined/>}
-                                      minLength={8}
+                                      prefix={<LockOutlined/>}     
                                       onChange={(text) =>
                                           this.setState({ password: text.target.value })
                                       }
