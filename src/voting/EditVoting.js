@@ -1,7 +1,7 @@
 import { Button, DatePicker, Form, Input, List, Radio, Switch } from "antd";
 import Layout, { Content } from "antd/lib/layout/layout";
 import React, { Component } from "react";
-import "../App.css"
+import "../App.css";
 import { Typography } from "antd";
 import Navbar from "../navbar/Navbar";
 import axios from "axios";
@@ -15,10 +15,13 @@ export default class EditVoting extends Component {
     super(props);
     this.state = {
       votings: [],
+      vote: {
+        options:[]
+      }
     };
   }
-
-  componentDidMount(id) {
+async componentDidMount() {
+    const vid = this.props.match.params.id;
     const form = {
       id: this.state.id,
       title: this.state.title,
@@ -30,28 +33,16 @@ export default class EditVoting extends Component {
       options: this.state.options,
     }; 
    
-console.log(id)
- axios
-      .get("http://localhost:8081/vote" ,{
-      })
+ await axios
+      .get(`http://localhost:8081/vote/` + vid )
       .then((response) => response.data)
       .then((data) => {
         console.log(form.id)
-        this.setState({ votings: data });
+        this.setState({ vote: data });
       }); 
-    axios
-      .post("http://localhost:8081/vote", form)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+ 
   
   }
-
-
-
 
 
   render() {
@@ -64,6 +55,7 @@ console.log(id)
       endDate,
       votingType,
       options,
+      vote
     } = this.state;
 
     const formSuccess = (datas) => {
@@ -90,7 +82,7 @@ console.log(id)
                 Edit Voting
               </h2>
               <hr />
-              {this.state.votings.map((vote, id) => (
+           
                 <Form
                   name="basic"
                   initialValues={{ remember: true }}
@@ -171,18 +163,18 @@ console.log(id)
                   </Radio.Group>
                 </Form.Item>
 
-            
+         {console.log(vote)}
 
                   <Text>OPTIONS</Text>
                   <ul>
-                    {this.state.votings.map((vote) => (
+                    {vote.options.map((opt) => (
                       <Form.Item>
-                        <Input disabled placeholder={vote.options} />
+                        <Input disabled placeholder={opt} />
                       </Form.Item>
                     ))}
-                  </ul>
+                  </ul> 
                 </Form>
-              ))}
+           
             </div>
           </Content>
         </div>
