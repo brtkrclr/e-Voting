@@ -29,18 +29,16 @@ export default class EditVoting extends Component {
       votingType: this.state.votingType,
       options: this.state.options,
     }; 
-
+   
+console.log(id)
  axios
-      .get("http://localhost:8081/vote",{
-        params:{
-          id:form.id
-        }
+      .get("http://localhost:8081/vote" ,{
       })
       .then((response) => response.data)
       .then((data) => {
         console.log(form.id)
         this.setState({ votings: data });
-      });
+      }); 
     axios
       .post("http://localhost:8081/vote", form)
       .then((response) => {
@@ -49,7 +47,12 @@ export default class EditVoting extends Component {
       .catch((error) => {
         console.log(error);
       });
+  
   }
+
+
+
+
 
   render() {
     const {
