@@ -1,6 +1,6 @@
 import {Breadcrumb, Button, Menu, Radio} from "antd";
 import Layout, { Content } from "antd/lib/layout/layout";
-import React, {Component} from "react";
+import React, {Component, useState, useEffect} from "react";
 import "../App.css";
 import { Typography } from 'antd';
 import Navbar from "../navbar/Navbar";
@@ -21,7 +21,17 @@ export default class FilterSearches extends Component{
         };
     }
 
+ 
     componentDidMount() {
+  /*  const {data} =    await axios
+      .get("http://localhost:8081/vote")
+      .then((response) => response.data)
+      .then((data) => {
+        this.setState({ votings: data });
+      });
+
+      setResults(data.query.search);
+ */
         axios
             .post()
             .then((response) => console.log(response.data));

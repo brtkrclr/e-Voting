@@ -4,9 +4,7 @@ import {
   Divider,
   Form,
   Input,
-  Radio,
-  Space,
-  Switch,
+
 } from "antd";
 import Layout, {Content, Footer} from "antd/lib/layout/layout";
 import React, { Component } from "react";
@@ -14,20 +12,18 @@ import "../App.css";
 import { Typography } from "antd";
 import Navbar from "../navbar/Navbar";
 import axios from "axios";
-import moment from "moment";
+
 import {
   LockOutlined,
   MailOutlined,
-  MinusCircleOutlined,
-  PlusOutlined,
+
 } from "@ant-design/icons";
-import { Link, Route } from "react-router-dom";
 import NavbarU from "../navbar/NavbarU";
 import Title from "antd/lib/skeleton/Title";
-const { RangePicker } = DatePicker;
 
 const { Text } = Typography;
-export default class ResetPasswordForm extends Component {
+
+export default class ChangePasswordForm extends Component {
   constructor(props) {
       super(props);
       this.state = this.initialState;
@@ -35,20 +31,21 @@ export default class ResetPasswordForm extends Component {
   }
 
   initialState = {
-      email: "",
+      email:"",
       password: "",
+      newpassword: "",
   };
 
   submitForm = (event) => {
       // alert("Successfully Created");
       console.log(this.state);
       const form = {
-          email: this.state.email,
           password: this.state.password,
+          newpassword: this.state.newpassword,
       };
       console.log(form);
       axios
-          .post("http://localhost:8082/api/auth/resetpassword", form)
+          .post("http://localhost:8082/api/auth/changepassword", form)
           .then((response) => {
               console.log(response);
           })
@@ -59,7 +56,7 @@ export default class ResetPasswordForm extends Component {
   };
 
   render() {
-      const { email, password } = this.state;
+      const { email, password, newpassword } = this.state;
 
       const formFail = (error) => {
           console.log("Form failed: ", error);
@@ -67,7 +64,7 @@ export default class ResetPasswordForm extends Component {
 
       return (
           <Layout className="layout">
-              <NavbarU />
+              <Navbar />
 
               <div style={{ marginTop: "50px" }}>
                   <Content
@@ -80,7 +77,7 @@ export default class ResetPasswordForm extends Component {
                       }}
                   >
                       <div className="site-layout-content">
-                          <h1 className="title">Reset Password</h1>
+                          <h1 className="title">Change Password</h1>
                           <Divider />
                           <Form
                               name="basic"
@@ -110,6 +107,29 @@ export default class ResetPasswordForm extends Component {
                               </Form.Item>
 
                               <Form.Item
+                                  name="oldpass"
+                                  rules={[
+                                      {
+                                          required: true,
+                                          message: "Please fill in your current password",
+                                      },
+                                  ]}
+                              >
+                                  <Input
+                                      placeholder="Current Password"
+                                      prefix={<LockOutlined/>}
+                                      minLength={8}
+                                      onChange={(text) =>
+                                          this.setState({ password: text.target.value })
+                                      }
+                                      style={{ borderRadius: "20px" }}
+                                      value={password}
+                                      type="password"
+                                  />
+                              </Form.Item>
+
+
+                              <Form.Item
                                   name="pass"
                                   rules={[
                                       {
@@ -123,22 +143,22 @@ export default class ResetPasswordForm extends Component {
                                       prefix={<LockOutlined/>}
                                       minLength={8}
                                       onChange={(text) =>
-                                          this.setState({ password: text.target.value })
+                                          this.setState({ newpassword: text.target.value })
                                       }
                                       style={{ borderRadius: "20px" }}
-                                      value={password}
+                                      value={newpassword}
                                       type="password"
                                   />
                               </Form.Item>
 
                               <Form.Item>
                                   <Button
+                                      style={{ borderRadius: "20px" }}
                                       className="button-color"
                                       type="primary"
                                       htmlType="submit"
-                                      style={{ borderRadius: "20px" }}
                                   >
-                                      Reset Password
+                                      Change Password
                                   </Button>
                               </Form.Item>
                           </Form>

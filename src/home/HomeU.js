@@ -1,5 +1,5 @@
 import { Button } from "antd";
-import Layout, { Content } from "antd/lib/layout/layout";
+import Layout, { Content, Footer } from "antd/lib/layout/layout";
 import React from "react";
 import "../App.css"
 import NavbarU from "../navbar/NavbarU";
@@ -66,6 +66,8 @@ const HomeU = () => {
           </div>
         </Content>
       </div>
+      
+      <Footer style={{ textAlign: "center" }}>©️2021 BallotBox</Footer>
     </Layout>
   );
 };

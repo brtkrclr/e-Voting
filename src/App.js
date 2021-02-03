@@ -23,6 +23,7 @@ import UserProfile from "./user/UserProfile";
 import FilterSearches from "./filtersearch/FilterSearches";
 import Navbar from "./navbar/Navbar";
 import ResetPasswordForm from "./auth/ResetPasswordForm";
+import ChangePasswordForm from "./auth/ChangePasswordForm";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -67,7 +68,8 @@ const App = () => {
             <Route path="/givevote" component={GiveVote}/>
             <Route path="/voteresult" component={VoteResult}/>
             <Route path="/userprofile" component={UserProfile}/>
-            <Route path="/resetpassword" component={ResetPasswordForm}/>
+            <Route path="/resetpassword" component={ResetPasswordForm}/>          
+            <Route exact path="/changepasswordform" component={ChangePasswordForm}/>
           </Switch>
         </div>
       </Router>

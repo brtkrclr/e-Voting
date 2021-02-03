@@ -16,17 +16,25 @@ const login=(username,password)=>{
         username,
         password,
     })
-    .then((response)=>{
-        if(response.data.accessToken){
-            localStorage.setItem("user",JSON.stringify(response.data));
-        }
-        return response.data;
-    });
+        .then((response)=>{
+            if(response.data.accessToken){
+                localStorage.setItem("user",JSON.stringify(response.data));
+            }
+            return response.data;
+        });
 };
 
 const logout=()=>{
     localStorage.removeItem("user");
 };
+
+const sendmail=(email)=>{
+    return axios.post(API_URL+"forgotpassword",{
+        email,
+    });
+};
+
+
 
 const getCurrentUser=()=>{
     return JSON.parse(localStorage.getItem("user"));
@@ -37,6 +45,6 @@ export default{
     login,
     logout,
     getCurrentUser,
+    sendmail,
+
 };
-
-

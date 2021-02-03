@@ -2,7 +2,7 @@ import { Form, Input, Button, Checkbox, Alert, Radio } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined, setTwoToneColor } from "@ant-design/icons";
 import "../App.css";
 import React, { useState, useRef } from "react";
-import Layout, { Content } from "antd/lib/layout/layout";
+import Layout, {Content, Footer} from "antd/lib/layout/layout";
 import NavbarU from "../navbar/NavbarU";
 import { Link, Route } from "react-router-dom";
 import axios from "axios";
@@ -70,9 +70,15 @@ const SignUp = (props) => {
       <NavbarU />
 
       <div style={{ marginTop: "50px" }}>
-        <Content style={{ padding: "0 50px", textAlign: "center" }}>
+        <Content  style={{
+          padding: "0 50px",
+          textAlign: "center",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}>
           <div className="site-layout-content">
-            <h1 className="title">BallotBox</h1>
+            <h1 className="title">Sign Up</h1>
 
             <Form
               ref={form}
@@ -165,6 +171,7 @@ const SignUp = (props) => {
                   htmlType="submit"
                   className="login-form-button"
                   ref={checkBtn}
+                  style={{ borderRadius: "20px" }}
                 >
                   Sign Up
                 </Button>
@@ -178,6 +185,7 @@ const SignUp = (props) => {
           </div>
         </Content>
       </div>
+      <Footer style={{ textAlign: "center" }}>©️2021 BallotBox</Footer>
     </Layout>
   );
 };

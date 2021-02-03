@@ -14,6 +14,8 @@ import {
   UserOutlined,
   CloseOutlined,
   DownOutlined,
+  LockOutlined,
+  AlignCenterOutlined,
 } from "@ant-design/icons";
 import React, { useState, useEffect } from "react";
 import "../App.css";
@@ -64,7 +66,7 @@ const Navbar = () => {
       
 
       </div>
-      <Menu.Item icon={<CloseOutlined />}>
+      <Menu.Item style={{textAlign:"center"}} icon={<CloseOutlined />}>
         <Link to="/homeU">
           <a
             target="_blank"
@@ -76,6 +78,17 @@ const Navbar = () => {
           </a>
         </Link>
       </Menu.Item>
+      <Menu.Item icon={<LockOutlined />}>
+          <Link to="/changepasswordform">
+            <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="/"
+            >
+              Change Password
+            </a>
+          </Link>
+        </Menu.Item>
     </Menu>
   );
   return (
