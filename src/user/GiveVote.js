@@ -1,163 +1,146 @@
-import Layout, { Content, Footer } from "antd/lib/layout/layout";
-import React, { Component, useState } from "react";
+import { Button, DatePicker, Form, Input, List, Radio, Switch } from "antd";
+import Layout, { Content } from "antd/lib/layout/layout";
+import React, { Component } from "react";
 import "../App.css";
+import { Typography } from "antd";
 import Navbar from "../navbar/Navbar";
 import axios from "axios";
-import { Divider, Space, Table, List, Radio, Input } from "antd";
-import { PageHeader } from 'antd';
-import { Popconfirm, message, Button } from 'antd';
-import { Link } from "react-router-dom";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-const RadioGroup = Radio.Group;
-const text = 'Are you sure of the option you chose?';
+import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import moment from "moment";
 
-function confirm() {
-    message.info('Your vote has been taken.');
-}
-
+const { Text } = Typography;
 
 export default class GiveVote extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          votings: [],
-          vote: { }
-        };
-      }
-    async componentDidMount() {
-        const vid = this.props.match.params.id;
+  constructor(props) {
+    super(props);
+    this.state = {
+      votings: [],
+      vote: {
+        options: [],
+      },
+    };
+  }
+  async componentDidMount() {
+    const vid = this.props.match.params.id;
+    console.log(vid);
+    const form = {
+      id: this.state.id,
+      title: this.state.title,
+      description: this.state.description,
+      organizer: this.state.organizer,
+      startDate: this.state.startDate,
+      endDate: this.state.endDate,
+      votingType: this.state.votingType,
+      options: this.state.options,
+    };
 
-    console.log(this.props.match.params.id,'asdas')
-        console.log(vid);
-        const form = {
-          id: this.state.id,
-          title: this.state.title,
-          description: this.state.description,
-          organizer: this.state.organizer,
-          startDate: this.state.startDate,
-          endDate: this.state.endDate,
-          votingType: this.state.votingType,
-          options: this.state.options,
-        }; 
-       
-     await axios
-          .get(`http://localhost:8081/vote/` + vid )
-          .then((response) => response.data)
-          .then((data) => {
-            console.log(form.id)
-            this.setState({ vote: data });
-          }); 
-     
-      
-      }
-    
- 
+    await axios
+      .get(`http://localhost:8081/vote/` + vid)
+      .then((response) => response.data)
+      .then((data) => {
+        this.setState({ vote: data });
+      });
 
+    await axios
+      .post("http://localhost:8081/vote", form)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
-    render() {
-        const {
-            id,
-            title,
-            description,
-            organizer,
-            startDate,
-            endDate,
-            votingType,
-            options,
-            vote
-          } = this.state;
-        const OptionsColumns = [
-            {
-                title: "",
-                dataIndex: "type",
-                key: "type"
-            },
-            {
-                title: "Select one of them",
-                dataIndex: "selectRadio",
-                key: "selectRadio",
-                render: (text) => (
-                    <Input type="radio" value={text} name="Select one of them">
-                        {text}
-                    </Input>
-                )
-            }];
+  render() {
+    const {
+      id,
+      title,
+      description,
+      organizer,
+      startDate,
+      endDate,
+      votingType,
+      options,
+      vote,
+    } = this.state;
 
-        const data = [
-            {
-                type: 'Option 1',
+    const formSuccess = (datas) => {
+      console.log("Form was finished successfully: ", datas);
+    };
 
-            },
-            {
-                type: 'Option 2',
-            },
-            {
-                type: 'Option 3',
-            },
+    const formFail = (error) => {
+      console.log("Form failed: ", error);
+    };
 
-        ];
-        return (
-            <Layout className="layout">
-                <Navbar />
-                <div style={{ marginTop: "10px" }}>
-                    <Content style={{ padding: "30px" }}>
-                        <div className="site-layout-content">
-
-                            <div className="site-page-header-ghost-wrapper">
-                                <List itemLayout="horizontal">
-                                    {this.state.votings.map((vote) => (
-                                        <PageHeader
-                                            title={vote.title}
-                                        >
-                                            <List.Item.Meta
-                                                description={vote.description}
-
-                                            />
-
-                                            <ul>
-                                                {this.state.votings.map((vote) => (
-                                                    <ul>
-                                                        {(vote?.options ?? []).map((option) => (
-                                                            <Button
-                                                                onClick={() => console.log("clicked!", option)}
-                                                            >
-                                                                {option}
-                                                            </Button>
-                                                        ))}
-                                                    </ul>
-                                                ))}
-                                            </ul>
-
-                                            <Link to="/voteresult">
-                                            <Popconfirm
-                                                placement="bottomLeft"
-                                                title={text}
-                                                onConfirm={confirm}
-                                                okText="Yes"
-                                                cancelText="No"
-                                            >
-                                                
-                                                <Button type="primary" htmlType="submit" block>
-                                                    SUBMIT
-                                </Button>
-                           
-                                            </Popconfirm>
-                                            </Link>
-                                        </PageHeader>
-
-
-                                    ))}
-                                </List>
-                            </div>
-
-                        </div>
-
-                    </Content>
-                </div>
-                <Footer style={{ textAlign: "center" }}>©️2021 BallotBox</Footer>
-            </Layout>
-        );
-
+    function disabledDate(current) {
+      // Can not select days before today
+      return current && current < moment().startOf("day");
     }
 
+    return (
+      <Layout className="layout">
+        <Navbar />
+
+        <div style={{ marginTop: "50px" }}>
+          <Content style={{ padding: "0 50px" }}>
+            <div className="site-layout-content">
+              <h2 style={{ textAlign: "center", fontSize: "36px" }}>
+                Give Voting
+              </h2>
+              <hr />
+
+              <Form
+                name="basic"
+                initialValues={{ remember: true }}
+                onFinish={formSuccess}
+                onFinishFailed={formFail}
+              >
+                <Text>TITLE or MAIN QUESTION</Text>
+                <Form.Item name="title">
+                  <Input disabled placeholder={vote.title} />
+                </Form.Item>
+
+                <Text>DESCRIPTION</Text>
+                <Form.Item name="description">
+                  <Input disabled placeholder={vote.description} />
+                </Form.Item>
+
+                <Text>ORGANIZER</Text>
+                <Form.Item name="organizer">
+                  <Input disabled placeholder={vote.organizer} />
+                </Form.Item>
+
+               
+                <Text>OPTIONS</Text>
+                <ul>
+                    {vote.options.map((vote) => (
+                         <ul>
+                         {(vote?.options ?? []).map((option) => (
+                           <Button
+                             onClick={() => console.log("clicked!", option)}
+                           >
+                             {option}
+                           </Button>
+                         ))}
+                       </ul>
+                    ))}
+                  </ul>
+
+                <Form.Item>
+                  <Button
+                    className="button-color"
+                    type="primary"
+                    htmlType="submit"
+                    
+                  >
+                    VOTE
+                  </Button>
+                </Form.Item>
+              </Form>
+            </div>
+          </Content>
+        </div>
+      </Layout>
+    );
+  }
 }

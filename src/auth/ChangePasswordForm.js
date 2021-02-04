@@ -40,6 +40,7 @@ export default class ChangePasswordForm extends Component {
       // alert("Successfully Created");
       console.log(this.state);
       const form = {
+          email:this.state.email,
           password: this.state.password,
           newpassword: this.state.newpassword,
       };

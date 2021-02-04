@@ -103,11 +103,13 @@ const Navbar = () => {
         </Col>
         <Col span={8} className="searchBar" style={{ color: "white" }}>
           <div style={{ marginTop: "15px" }}>
+            <Link to="/filtersearch">
             <Search
               placeholder="Search"
               onSearch={onSearch}
               enterButton
             />
+            </Link>
           </div>
         </Col>
         <Col span={8} className="subMenu">

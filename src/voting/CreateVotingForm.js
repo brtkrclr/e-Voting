@@ -59,8 +59,8 @@ export default class CreateVotingForm extends Component {
       })
       .catch((error) => {
         console.log(error);
-      });
-    // .then((resp) => (window.location.href = "/home"));
+      })
+     .then((resp) => (window.location.href = "/organizer"));
   };
 
   render() {

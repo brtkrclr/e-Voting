@@ -121,7 +121,6 @@ export default class ResetPasswordForm extends Component {
                                   <Input
                                       placeholder="New Password"
                                       prefix={<LockOutlined/>}
-                                      minLength={8}
                                       onChange={(text) =>
                                           this.setState({ password: text.target.value })
                                       }

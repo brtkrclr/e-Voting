@@ -16,11 +16,11 @@ export default class EditVoting extends Component {
     this.state = {
       votings: [],
       vote: {
-        options:[]
-      }
+        options: [],
+      },
     };
   }
-async componentDidMount() {
+  async componentDidMount() {
     const vid = this.props.match.params.id;
     console.log(vid);
     const form = {
@@ -32,19 +32,24 @@ async componentDidMount() {
       endDate: this.state.endDate,
       votingType: this.state.votingType,
       options: this.state.options,
-    }; 
-   
- await axios
-      .get(`http://localhost:8081/vote/` + vid )
+    };
+
+    await axios
+      .get(`http://localhost:8081/vote/` + vid)
       .then((response) => response.data)
       .then((data) => {
-        console.log(form.id)
         this.setState({ vote: data });
-      }); 
- 
-  
-  }
+      });
 
+    await axios
+      .post("http://localhost:8081/vote", form)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   render() {
     const {
@@ -56,7 +61,7 @@ async componentDidMount() {
       endDate,
       votingType,
       options,
-      vote
+      vote,
     } = this.state;
 
     const formSuccess = (datas) => {
@@ -83,55 +88,54 @@ async componentDidMount() {
                 Edit Voting
               </h2>
               <hr />
-           
-                <Form
-                  name="basic"
-                  initialValues={{ remember: true }}
-                  onFinish={formSuccess}
-                  onFinishFailed={formFail}
-                >
-                  <Text>TITLE or MAIN QUESTION</Text>
-                  <Form.Item name="title">
-                    <Input disabled placeholder={vote.title} />
-                  </Form.Item>
 
-                  <Text>DESCRIPTION</Text>
-                  <Form.Item name="description">
-                    <Input disabled placeholder={vote.description} />
-                  </Form.Item>
+              <Form
+                name="basic"
+                initialValues={{ remember: true }}
+                onFinish={formSuccess}
+                onFinishFailed={formFail}
+              >
+                <Text>TITLE or MAIN QUESTION</Text>
+                <Form.Item name="title">
+                  <Input disabled placeholder={vote.title} />
+                </Form.Item>
 
-                  <Text>ORGANIZER</Text>
-                  <Form.Item name="organizer">
-                    <Input disabled placeholder={vote.organizer} />
-                  </Form.Item>
+                <Text>DESCRIPTION</Text>
+                <Form.Item name="description">
+                  <Input disabled placeholder={vote.description} />
+                </Form.Item>
 
-                  <Text>START DATE</Text>
-                  <Form.Item
-                    name="startDate"
-                    rules={[{ required: true, message: "Please input!" }]}
-                  >
-                    <DatePicker
-                      defaultDate={vote.startDate}
-                      disabledDate={disabledDate}
-                    />
-                  </Form.Item>
+                <Text>ORGANIZER</Text>
+                <Form.Item name="organizer">
+                  <Input disabled placeholder={vote.organizer} />
+                </Form.Item>
 
-                  <Text>END DATE</Text>
-                  <Form.Item
-                    name="endDate"
-                    rules={[{ required: true, message: "Please input!" }]}
-                  >
-                    <DatePicker
-                      defaultDate={vote.endDate}
-                      disabledDate={disabledDate}
-                    />
-                  </Form.Item>
-
-                  <Text>TYPE OF VOTING</Text>
+                <Text>START DATE</Text>
                 <Form.Item
-                  required
-                  name="votingType"
+                  name="startDate"
                   rules={[{ required: true, message: "Please input!" }]}
+                >
+                  <DatePicker
+                    defaultDate={vote.startDate}
+                    disabledDate={disabledDate}
+                  />
+                </Form.Item>
+
+                <Text>END DATE</Text>
+                <Form.Item
+                  name="endDate"
+                  rules={[{ required: true, message: "Please input!" }]}
+                >
+                  <DatePicker
+                    defaultDate={vote.endDate}
+                    disabledDate={disabledDate}
+                  />
+                </Form.Item>
+
+                <Text>TYPE OF VOTING</Text>
+                <Form.Item
+                  disabled
+                  name="votingType"
                 >
                   <Radio.Group name="radiogroup">
                     <Radio.Button
@@ -163,19 +167,26 @@ async componentDidMount() {
                     </Radio.Button>
                   </Radio.Group>
                 </Form.Item>
+                <Text>OPTIONS</Text>
+                <ul>
+                  {vote.options.map((opt) => (
+                    <Form.Item>
+                      <Input disabled placeholder={opt} />
+                    </Form.Item>
+                  ))}
+                </ul>
 
-         {console.log(vote)}
-
-                  <Text>OPTIONS</Text>
-                  <ul>
-                    {vote.options.map((opt) => (
-                      <Form.Item>
-                        <Input disabled placeholder={opt} />
-                      </Form.Item>
-                    ))}
-                  </ul> 
-                </Form>
-           
+                <Form.Item>
+                  <Button
+                    className="button-color"
+                    type="primary"
+                    htmlType="submit"
+                    
+                  >
+                    Update Voting
+                  </Button>
+                </Form.Item>
+              </Form>
             </div>
           </Content>
         </div>

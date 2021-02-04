@@ -6,7 +6,6 @@ import Home from "./home/Home";
 import HomeU from "./home/HomeU";
 import OrganizerProfile from "./organizer/OrganizerProfile";
 import UserHome from "./auth/BoardUser";
-import GiveVote from "./user/GiveVote";
 import AdminHome from "./auth/BoardAdmin";
 import CreateVotingForm from "./voting/CreateVotingForm";
 import EditVoting from "./voting/EditVoting";
@@ -25,6 +24,7 @@ import Navbar from "./navbar/Navbar";
 import ResetPasswordForm from "./auth/ResetPasswordForm";
 import ChangePasswordForm from "./auth/ChangePasswordForm";
 import AllVotings from "./user/AllVotings";
+import GiveVote from "./user/GiveVote";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -66,12 +66,12 @@ const App = () => {
             <Route path="/createvote" component={CreateVotingForm} />
             <Route path="/editvoting/:id" component={EditVoting} />
             <Route path="/filtersearch" component={FilterSearches}/>
-            <Route path="/givevote" component={GiveVote}/>
             <Route path="/voteresult" component={VoteResult}/>
             <Route path="/userprofile" component={UserProfile}/>
             <Route path="/resetpasswordform" component={ResetPasswordForm}/>          
             <Route exact path="/changepasswordform" component={ChangePasswordForm}/>
             <Route path="/allvotings" component={AllVotings}/>
+            <Route path="/givevote/:id" component={GiveVote}/>
           </Switch>
         </div>
       </Router>
